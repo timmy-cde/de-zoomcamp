@@ -8,6 +8,7 @@ sources:
     tables:
       - name: green_2019_2020_bq
       - name: yellow_2019_2020_bq
+      - name: fhv_2019_2020_bq
 
 models:
   - name: stg_yellow_2019_2020_bq
@@ -201,5 +202,46 @@ models:
               quote: false
 
       - name: payment_type_description
+        data_type: string
+        description: ""
+
+  - name: stg_fhv_2019_bq
+    description: ""
+    columns:
+      - name: dispatching_base_num
+        data_type: string
+        description: ""
+
+      - name: pickup_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: dropoff_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: pulocation_id
+        data_type: int64
+        description: ""
+        tests:
+          - relationships:
+              field: locationid
+              to: ref('taxi_zones_lookup')
+              severity: warn
+
+      - name: dolocation_id
+        data_type: int64
+        description: ""
+        tests:
+          - relationships:
+              field: locationid
+              to: ref('taxi_zones_lookup')
+              severity: warn
+
+      - name: sr_flag
+        data_type: int64
+        description: ""
+
+      - name: affiliated_base_number
         data_type: string
         description: ""
